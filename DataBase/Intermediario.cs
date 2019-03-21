@@ -7,17 +7,17 @@ namespace DataBase
         private SqlConnection _sqlDataBase;
         private OracleConnection _oracleDataBase;
 
-        public bool ParameterCheckOut(string DataBaseChoise, string Parameter)
+        public DbConnection ParameterCheckOut(string DataBaseChoise, string Parameter)
         {
             if (DataBaseChoise == "sql")
             {
                 _sqlDataBase = new SqlConnection(Parameter);
-                return _sqlDataBase.Validation();
+                return _sqlDataBase;
             }
             else
             {
                 _oracleDataBase = new OracleConnection(Parameter);
-                return _oracleDataBase.Validation();
+                return _oracleDataBase;
             }
         }
 
@@ -36,7 +36,7 @@ namespace DataBase
             return Parameter;
         }
 
-        public void Open_Close_Control(string Answer)
+        public void Open_Close_Control(DbConnection dataBase)
         {
             while (true)
             {
@@ -44,19 +44,11 @@ namespace DataBase
 
                 if (Command == "open")
                 {
-                    if (Answer == "sql")
-                    {
-                        _sqlDataBase.OpenConection();
-                    }
-                    else { _oracleDataBase.OpenConection(); }
+                    dataBase.OpenConection();
                 }
                 else if (Command == "close")
                 {
-                    if (Answer == "sql")
-                    {
-                        _sqlDataBase.CloseConection();
-                    }
-                    else { _oracleDataBase.CloseConection(); }
+                    dataBase.CloseConection();
                 }
                 else if (Command == "exit")
                 {

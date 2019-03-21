@@ -22,13 +22,13 @@ namespace DataBase
                     Console.Write("\nEscribe los parametros que corresponda a esa base de datos ");
 
                     string Parameter= Begin.Input_String();
-
-                    if (Begin.ParameterCheckOut(Answer, Parameter))
+                    var dataBase= Begin.ParameterCheckOut(Answer, Parameter);
+                    if (dataBase.Validation())
                     {
                         Console.WriteLine("\nLa Conexion se ha validado Correctamente");
                         Console.WriteLine("\nEscribe 'Open' para abrir la conexion, 'Close' para cerrarla y 'Exit' para salir ");
 
-                        Begin.Open_Close_Control(Answer);
+                        Begin.Open_Close_Control(dataBase);
                     }
                     else{Console.WriteLine("\nEl parametro pasado no es valido");}
 
